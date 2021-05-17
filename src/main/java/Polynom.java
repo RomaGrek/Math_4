@@ -86,8 +86,6 @@ public class Polynom {
             simpleDimple++;
             lolish += h;
         }
-
-        chart.addSeries("lol", new double[]{3}, new double[]{-3});
         new SwingWrapper(chart).displayChart();
 
 
