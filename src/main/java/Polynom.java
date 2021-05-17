@@ -13,12 +13,19 @@ public class Polynom {
     static int sumX;
 
 
+//    public static double roundCoordinate(double cor) {
+//        double quantity = Math.pow(10, 3);
+//        double result = Math.ceil(cor * quantity) / quantity;
+//        return result;
+//    }
+
 
     static void newtonMethod(Function function) {
-        double[] xData = new double[91];
-        double[] yData = new double[91];
+        sumX = (int) (((rightBoard - leftBoard) * 10) + 1);
+        double[] xData = new double[sumX];
+        double[] yData = new double[sumX];
         int p = 0;
-        for (double i = 1; i <= 10; i = i + 0.1) {
+        for (double i = leftBoard; i <= rightBoard; i = i + 0.1) {
             xData[p] = i;
             yData[p] = function.func(i);
             p++;
@@ -49,8 +56,7 @@ public class Polynom {
                 y_d[i][j] = y_d[i - 1][j + 1] - y_d[i - 1][j];
             }
         }
-        sumX = 91;
-        
+
         xPol = new double[sumX];
         yPol = new double[sumX];
         
@@ -68,26 +74,40 @@ public class Polynom {
                 xPol[i] = xxx;
                 yPol[i] = result;
 
-            xxx = xxx + 0.1;
+                xxx = xxx + 0.1;
         }
-        chart.addSeries("SUKA", xPol, yPol);
+        chart.addSeries("Интерполяция", xPol, yPol);
+        chart.getStyler().setZoomEnabled(true);
+        int simpleDimple = 1;
+        double lolish = leftBoard + h;
+        for (int i = 0; i < n; i++) {
+            String message = Integer.toString(simpleDimple);
+            chart.addSeries("x" + message, new double[]{lolish}, new double[]{function.func(lolish)});
+            simpleDimple++;
+            lolish += h;
+        }
+
+        chart.addSeries("lol", new double[]{3}, new double[]{-3});
         new SwingWrapper(chart).displayChart();
 
 
     }
 
     public static void searchY() {
-        System.out.println("Введите значение X для поиска значения Y по интерполяции:");
         Scanner scanner1 = new Scanner(System.in);
         while (true) {
+            System.out.println("Введите значение X для поиска значения Y по интерполяции:");
             double x_t = scanner1.nextDouble();
             if (x_t == -999) { break; }
             for (int i = 0; i < sumX; i++) {
-                if (xPol[i] == x_t) {
+                if (Math.abs(xPol[i] - x_t) <= 0.00001) {
                     System.out.println("Значение Y в точке " + x_t + " равно " + yPol[i]);
                 }
             }
+            System.out.println("Для завершения программы введите: -999");
         }
+        System.out.println("Завершение программы...");
+        System.exit(0);
     }
 }
 
