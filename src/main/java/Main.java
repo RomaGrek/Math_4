@@ -23,6 +23,7 @@ public class Main {
                 System.out.println("Пожалуйста, введите количество точек интерполяции");
                 Polynom.n = scanner.nextInt();
                 Polynom.newtonMethod(function1);
+                Polynom.searchY();
                 break;
             case 2:
                 break;
