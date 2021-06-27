@@ -1,2 +1,2 @@
 # Math_4
-Hello bithes :))))) <- it is joke brooooooo
+спешл фор френд Маша)
